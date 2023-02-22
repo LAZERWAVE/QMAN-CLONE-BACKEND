@@ -1,0 +1,78 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdditionalClass {
+  additionalClassID      String                  @id @default(uuid())
+  semesterID             String
+  courseSubject          String
+  assistantInitial1      String
+  assistantInitial2      String?
+  date                   DateTime
+  shift                  Int
+  class                  String
+  location               String
+  done                   Boolean                 @default(false)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  additionalClassDetails AdditionalClassDetail[]
+}
+
+model AdditionalClassDetail {
+  additionalClassDetailID String          @id @default(uuid())
+  additionalClassID       String
+  studentNIM              String
+  studentName             String
+  createdAt               DateTime        @default(now())
+  updatedAt               DateTime        @updatedAt
+  additionalClass         AdditionalClass @relation(fields: [additionalClassID], references: [additionalClassID])
+}
+
+model Petition {
+  petitionID          String           @id @default(uuid())
+  semesterID          String
+  petitionTitle       String
+  petitionDescription String?
+  petitionCreator     String
+  petitionMaxSlot     Int
+  date                DateTime
+  ongoing             Boolean          @default(false)
+  mode                String
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  petitionDetails     PetitionDetail[]
+}
+
+model PetitionDetail {
+  petitionDetailID String   @id @default(uuid())
+  petitionID       String
+  assistant        String
+  shift            Int
+  kpiPoint         Int
+  bgPoint          Int
+  location         String
+  approved         Boolean
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  petition         Petition @relation(fields: [petitionID], references: [petitionID])
+}
+
+model SwitchTeaching {
+  switchTeachingID String   @id @default(uuid())
+  semesterID       String
+  assistantFrom    String
+  assistantTo      String
+  courseSubject    String
+  class            String
+  date             DateTime
+  approved         Boolean  @default(false)
+  status           String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

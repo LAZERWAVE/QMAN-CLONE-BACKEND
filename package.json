@@ -1,0 +1,37 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "QMan Back End",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js --ext js,graphql,json --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SLC",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^7.1.3",
+    "@prisma/client": "^2.21.2",
+    "babel-cli": "^6.26.0",
+    "babel-node": "0.0.1-security",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "graphql-cli": "^4.1.0",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "request-promise": "^4.2.6"
+  },
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "nodemon": "^2.0.6",
+    "prisma": "^2.21.2"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  }
+}
